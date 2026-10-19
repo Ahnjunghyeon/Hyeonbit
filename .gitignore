@@ -42,6 +42,11 @@ Thumbs.db
 *.pem
 *.key
 
+
+# *.zip
+*.zip
+
+
 # IMPORTANT:
 # public/downloads/ is intentionally NOT ignored.
 # File Bowling installer files are deployed as portfolio downloads.

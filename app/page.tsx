@@ -34,6 +34,8 @@ type Project = {
   detail: string;
   tags: string[];
   href?: string;
+  notionUrl?: string;
+  downloads?: { label: string; href: string; filename: string }[];
   download?: {
     primary: string;
     zip?: string;
@@ -82,20 +84,47 @@ const profile: Profile = {
   englishName: "HYEON_BIT",
   roleLabel: "현빗 | AI 바이브코딩",
   eyebrow: "HYEON_BIT / SIDE PROJECT / BUILD",
-  headlineTop: "Hyeon_bit",
-  headlineBottom: "사이드프로젝트",
-  introTitle: "아이디어를 AI와 바이브코딩으로 실제 서비스까지 연결합니다.",
+  headlineTop: "현빗의",
+  headlineBottom: "사이드프로젝트 개발",
+  introTitle: "IDEA + VIVE CODING",
   introParagraphs: [
-    "직접 기획하고 만들며, 바로 써볼 수 있는 서비스와 도구를 만드는 것을 좋아합니다."
-    
+    " ",
   ],
-  introHighlight: "아래 프로젝트는 그렇게 만들어진 서비스들입니다."
+  introHighlight: " ",
 };
 
 const projects: Project[] = [
   {
-    id: "flowmark",
+    id: "chiikawa-windows",
     number: "01",
+    title: "치이카와 다운로드",
+    category: "WINDOWS DESKTOP APP",
+    summary: "WINDOWS용 바탕화면 치이카와 굿즈",
+    description: "치이카와·하치와레·우사기·모몽가가 캐릭터로 구성되어있습니다.",
+    detail: "압축을 푼 뒤 Chiikawa.exe를 실행하면 됩니다. 창 옆에 매달린 캐릭터는 약 1초 뒤 벽을 타고 올라가고, 꼭대기에서 산책과 휴식 동작을 이어갑니다. 설치 방법과 단축키, 주의사항은 Notion 가이드에서 확인할 수 있습니다.",
+    tags: ["Windows", "Desktop App", "Chiikawa"],
+    notionUrl: "https://app.notion.com/p/Windows-3feb927d091c81079696fd0a07485589?source=copy_link",
+    downloads: [{ label: "Windows 앱 ZIP 다운로드", href: "/downloads/Chiikawa_Windows(1).zip", filename: "Chiikawa_Windows(1).zip" }],
+    mediaKind: "desktop-app",
+    media: { app: "/projects/chiikawa-logo.png" },
+  },
+  {
+    id: "chiikawa-assets",
+    number: "02",
+    title: "치이카와 프롬프트",
+    category: "AI APP BUILD GUIDE",
+    summary: "Assets와 프롬프트로 바탕화면 캐릭터 앱 만들기",
+    description: "이미지 assets를 준비하고 GPT-ASTRA에 구현 프롬프트를 입력해 Windows 캐릭터 앱을 만드는 가이드입니다.",
+    detail: "Node.js와 편집기 설치부터 assets 배치, Electron 앱 구조, 캐릭터의 걷기·매달리기·벽타기 상태, 빌드 및 실제 Windows 검증까지 안내합니다. 전체 설명과 복사용 프롬프트는 Notion 페이지에서 확인할 수 있습니다.",
+    tags: ["GPT-ASTRA", "Assets", "Prompt"],
+    notionUrl: "https://app.notion.com/p/GPT-ASTRA-Assets-3feb927d091c81ae926cd1e7b7d6deec?source=copy_link",
+    downloads: [{ label: "Assets ZIP 다운로드", href: "/downloads/Chiikawa_Assets.zip", filename: "Chiikawa_Assets.zip" }],
+    mediaKind: "desktop-app",
+    media: { app: "/projects/chiikawa-logo.png" },
+  },
+  {
+    id: "flowmark",
+    number: "03",
     title: "Flowmark",
     category: "WEB + MOBILE",
     summary: "중요한 시장 흐름을 빠르게 확인하는 경제 뉴스 서비스",
@@ -113,7 +142,7 @@ const projects: Project[] = [
   },
   {
     id: "bap",
-    number: "02",
+    number: "04",
     title: "BAP.P",
     category: "MOBILE FIRST",
     summary: "밥 프레지던트 — 식사 선택을 더 재미있게 만드는 모바일 중심 서비스",
@@ -128,7 +157,7 @@ const projects: Project[] = [
   },
   {
     id: "usagi",
-    number: "03",
+    number: "05",
     title: "USAGI",
     category: "MOBILE FIRST",
     summary: "우리 사이의 기류를 해석하는 AI 관계 분석 서비스",
@@ -143,7 +172,7 @@ const projects: Project[] = [
   },
   {
     id: "folder-tree",
-    number: "04",
+    number: "06",
     title: "Folder Tree",
     category: "WEB ONLY",
     summary: "폴더의 구조만 빠르게 복제하는 웹 전용 도구",
@@ -158,7 +187,7 @@ const projects: Project[] = [
   },
   {
     id: "file-bowling",
-    number: "05",
+    number: "07",
     title: "File Bowling",
     category: "DESKTOP APP",
     summary: "바탕화면의 파일을 볼링처럼 날리는 Windows 설치형 프로그램",
@@ -246,6 +275,7 @@ const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 export default function Home() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const routeInitializedRef = useRef(false);
   const [introNoteIndex, setIntroNoteIndex] = useState(0);
   const [notePhase, setNotePhase] = useState<NotePhase>("settled");
   const [peelProgress, setPeelProgress] = useState(0);
@@ -258,7 +288,25 @@ export default function Home() {
   const dragPointerIdRef = useRef<number | null>(null);
   const dragStartXRef = useRef<number | null>(null);
   const skipClickRef = useRef(false);
-  const dragMovedRef = useRef(false);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (!routeInitializedRef.current) {
+      routeInitializedRef.current = true;
+      const projectId = url.searchParams.get("project");
+      if (projectId) {
+        const routedProject = projects.find((project) => project.id === projectId);
+        if (routedProject) {
+          setSelected(routedProject);
+          return;
+        }
+      }
+    }
+
+    if (selected) url.searchParams.set("project", selected.id);
+    else url.searchParams.delete("project");
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [selected]);
 
   useEffect(() => {
     if (!selected) return;
@@ -288,7 +336,6 @@ export default function Home() {
 
   const introNote = introNotes[introNoteIndex];
   const noteBusy = notePhase !== "settled";
-  const noteOpacity = peelProgress <= 0.62 ? 1 : clamp(1 - (peelProgress - 0.62) / 0.38, 0, 1);
 
   const stopAnimations = () => {
     if (noteTimerRef.current) {
@@ -333,11 +380,11 @@ export default function Home() {
     }, 220);
   };
 
-  const triggerNoteChange = (fromProgress = Math.max(peelProgress, 0.14)) => {
+  const triggerNoteChange = (fromProgress = peelProgress) => {
     if (noteBusy) return;
     setIsDraggingNote(false);
     setNotePhase("switching");
-    animateProgress(fromProgress, 1, 560, () => {
+    animateProgress(fromProgress, 1, 420, () => {
       noteTimerRef.current = window.setTimeout(() => {
         showNextNote();
       }, 24);
@@ -350,7 +397,7 @@ export default function Home() {
       return;
     }
     if (isDraggingNote || noteBusy) return;
-    triggerNoteChange(0.14);
+    triggerNoteChange(0);
   };
 
   const handlePostitPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
@@ -365,10 +412,8 @@ export default function Home() {
     dragPointerIdRef.current = event.pointerId;
     dragStartXRef.current = event.clientX;
     skipClickRef.current = false;
-    dragMovedRef.current = false;
     setIsDraggingNote(true);
     setNotePhase("settled");
-    setPeelProgress((current) => (current < 0.14 ? 0.14 : current));
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
@@ -376,29 +421,22 @@ export default function Home() {
     if (!isDraggingNote || dragPointerIdRef.current !== event.pointerId || dragStartXRef.current === null) return;
     const deltaX = Math.max(0, dragStartXRef.current - event.clientX);
     const progress = clamp(deltaX / 140, 0, 1);
-    if (deltaX > 3) dragMovedRef.current = true;
-    setPeelProgress(clamp(Math.max(0.14, progress), 0, 1));
+    setPeelProgress(progress);
   };
 
   const handlePostitPointerUp = (event: ReactPointerEvent<HTMLButtonElement>) => {
     if (dragPointerIdRef.current !== event.pointerId) return;
     event.currentTarget.releasePointerCapture(event.pointerId);
-    const didMove = dragMovedRef.current;
     dragPointerIdRef.current = null;
     dragStartXRef.current = null;
-    dragMovedRef.current = false;
     setIsDraggingNote(false);
 
-    if (!didMove) {
-      return;
-    }
-
-    if (peelProgress >= 0.56) {
+    if (peelProgress >= 0.36) {
       skipClickRef.current = true;
-      triggerNoteChange(Math.max(peelProgress, 0.14));
+      triggerNoteChange(peelProgress);
     } else {
       skipClickRef.current = true;
-      animateProgress(peelProgress, 0, 300, () => {
+      animateProgress(peelProgress, 0, 240, () => {
         setPeelProgress(0);
       });
     }
@@ -407,9 +445,8 @@ export default function Home() {
   const handlePostitPointerCancel = () => {
     dragPointerIdRef.current = null;
     dragStartXRef.current = null;
-    dragMovedRef.current = false;
     setIsDraggingNote(false);
-    animateProgress(peelProgress, 0, 220, () => {
+    animateProgress(peelProgress, 0, 180, () => {
       setPeelProgress(0);
     });
   };
@@ -438,7 +475,7 @@ export default function Home() {
                 ))}
                 <p><strong>{profile.introHighlight}</strong></p>
               </div>
-              <p className="hero-signature">A FEW NOTES ABOUT HYEON_BIT.</p>
+              {/* <p className="hero-signature">A FEW NOTES ABOUT HYEON_BIT.</p> */}
             </div>
 
             <div className={`playground note-playground phase-${notePhase}`} aria-live="polite">
@@ -459,7 +496,7 @@ export default function Home() {
                   onPointerCancel={handlePostitPointerCancel}
                   disabled={noteBusy}
                   aria-label="포스트잇을 눌러 다음 소개 메모 보기"
-                  style={{ ["--peel-progress" as string]: String(peelProgress), ["--note-opacity" as string]: String(noteOpacity) }}
+                  style={{ ["--peel-progress" as string]: String(peelProgress) }}
                 >
                   <span className="postit-under under-one" aria-hidden="true" />
                   <span className="postit-under under-two" aria-hidden="true" />
@@ -482,7 +519,7 @@ export default function Home() {
                 <p>오른쪽 아래를 왼쪽으로 살짝 끌어당기거나 포스트잇을 클릭해 다음 메모를 볼 수 있습니다.</p>
               </div>
 
-              <button type="button" className="playground-hint" onClick={() => triggerNoteChange(0.14)} disabled={noteBusy}>
+              <button type="button" className="playground-hint" onClick={() => triggerNoteChange(0)} disabled={noteBusy}>
                 NEXT NOTE <span>↑</span>
               </button>
             </div>
@@ -496,7 +533,7 @@ export default function Home() {
         <div className="page-shell section-shell">
           <div className="section-heading side-project-heading">
             <h2>SIDE PROJECT</h2>
-            {/* <p>현빗이 직접 만들고 배포해 본 서비스와 도구들입니다.</p> */}
+            <p>현빗이 직접 만들고 배포해 본 서비스와 도구들입니다.</p>
           </div>
 
           <div className="project-grid">
@@ -514,7 +551,9 @@ export default function Home() {
                   <p>{project.summary}</p>
                   <div className="project-actions">
                     <button type="button" onClick={() => setSelected(project)}>Info</button>
-                    {project.href ? (
+                    {project.notionUrl ? (
+                      <a href={project.notionUrl} target="_blank" rel="noreferrer">설명·다운로드 <ArrowUpRight /></a>
+                    ) : project.href ? (
                       <a href={project.href} target="_blank" rel="noreferrer">Open <ArrowUpRight /></a>
                     ) : project.download ? (
                       <a href={project.download.primary} download={project.download.filename}>Download ↓</a>
@@ -532,8 +571,10 @@ export default function Home() {
       <section className="contact-section" id="contact">
         <div className="page-shell contact-shell">
           <p>CONTACT</p>
-          <h2>현빗 | AI • 바이브코딩</h2>
-          <div className="contact-bottom"><p></p><a href="https://www.instagram.com/hyeon_bit/">@Hyeon_bit <ArrowUpRight /></a></div>
+          {/* <h2>현빗과 함께 만들어보고 싶은 아이디어가 있다면 편하게 연락해주세요.</h2> */}
+          <div className="contact-bottom">
+            {/* <p>작은 아이디어부터 실제 서비스 프로토타입까지 함께 이야기할 수 있습니다.</p> */}
+            <a href="mailto:hyeonbit1271@gmail.com">hyeonbit1271@gmail.com <ArrowUpRight /></a></div>
         </div>
       </section>
 
@@ -554,7 +595,14 @@ export default function Home() {
               <div className="modal-description">
                 <p>{selected.description}</p><p>{selected.detail}</p>
                 <div className="tag-row">{selected.tags.map((tag) => <span key={tag}>#{tag}</span>)}</div>
-                {selected.href ? (
+                {selected.downloads ? (
+                  <div className="modal-download-actions">
+                    <a className="modal-cta" href={selected.notionUrl} target="_blank" rel="noreferrer">Notion에서 설치·제작 설명 보기 <ArrowUpRight /></a>
+                    {selected.downloads.map((item) => (
+                      <a className="modal-download-secondary" key={item.href} href={item.href} download={item.filename}>{item.label} ↓</a>
+                    ))}
+                  </div>
+                ) : selected.href ? (
                   <a className="modal-cta" href={selected.href} target="_blank" rel="noreferrer">서비스 실행하기 <ArrowUpRight /></a>
                 ) : selected.download ? (
                   <div className="modal-download-actions">
