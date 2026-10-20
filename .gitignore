@@ -43,9 +43,6 @@ Thumbs.db
 *.key
 
 
-# *.zip
-*.zip
-
 
 # IMPORTANT:
 # public/downloads/ is intentionally NOT ignored.

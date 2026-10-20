@@ -4033,3 +4033,131 @@ footer { padding: 0; }
   .postit-peel-shadow,
   .postit-content { transition: none !important; animation: none !important; }
 }
+
+/* A warmer, tactile memo scene: corkboard, paper grain and soft contact shadows. */
+.note-playground {
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(145deg, #282a31, #1c1e24 70%);
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 20px 50px rgba(0,0,0,.2);
+}
+.note-playground::before,
+.note-playground::after { content: none; }
+.notes-caption { color: rgba(255,255,255,.58); }
+.notes-caption strong { color: rgba(255,255,255,.84); }
+.notes-scene { inset: 62px 24px 124px; }
+.note-board {
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 16px;
+  background-color: #a87950;
+  background-image:
+    radial-gradient(ellipse at 18% 30%, rgba(255,225,177,.14) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 76% 64%, rgba(62,35,20,.16) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 48% 82%, rgba(255,232,196,.1) 0 1px, transparent 2px),
+    repeating-linear-gradient(7deg, rgba(70,39,22,.035) 0 1px, transparent 1px 5px),
+    linear-gradient(135deg, #bd9165, #9e704a 58%, #ae8056);
+  box-shadow: inset 0 2px 8px rgba(49,28,16,.24), inset 0 0 0 5px rgba(255,239,214,.045), 0 12px 28px rgba(0,0,0,.17);
+}
+.postit-stack { filter: drop-shadow(0 15px 14px rgba(0,0,0,.2)); }
+.postit-under,
+.postit-note { border-radius: 2px 3px 2px 3px; }
+.postit-under {
+  background: linear-gradient(155deg, #f4e9ac, #e7d98e);
+  border: 1px solid rgba(111,91,44,.16);
+  box-shadow: 0 2px 4px rgba(71,54,25,.16);
+}
+.under-one { transform: translate(7px, 7px) rotate(2.2deg); opacity: .8; }
+.under-two { transform: translate(12px, 12px) rotate(-1.6deg); opacity: .55; }
+.postit-note {
+  background-color: #fff4b2;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(107,91,42,.018) 0 1px, transparent 1px 4px),
+    radial-gradient(ellipse at 16% 12%, rgba(255,255,255,.62), transparent 58%),
+    linear-gradient(145deg, #fff8cf 0%, #fff2aa 64%, #f4e493 100%);
+  border: 1px solid rgba(112,93,42,.16);
+  border-radius: 2px 3px 2px 3px;
+  box-shadow: 0 2px 3px rgba(71,54,25,.12), 2px 7px 13px rgba(54,38,17,.19), 0 20px 28px rgba(35,25,12,.16);
+  transform: rotate(-1.5deg);
+  transition: transform 280ms cubic-bezier(.2,.75,.25,1), box-shadow 280ms ease;
+}
+.postit-stack:hover .postit-note,
+.postit-stack:focus-visible .postit-note {
+  transform: translateY(-4px) rotate(-.4deg);
+  box-shadow: 0 3px 5px rgba(71,54,25,.13), 3px 11px 18px rgba(54,38,17,.2), 0 24px 32px rgba(35,25,12,.18);
+}
+.postit-note::before {
+  top: -9px;
+  width: 78px;
+  height: 22px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, rgba(255,255,241,.82), rgba(242,233,194,.58));
+  box-shadow: 0 1px 2px rgba(68,52,23,.12);
+  opacity: .82;
+  transform: translateX(-50%) rotate(-1.4deg);
+}
+.postit-note strong { color: #373322; }
+.postit-note p { color: rgba(55,51,34,.82); }
+.postit-peel-sheet {
+  background: linear-gradient(135deg, #fffef2 0%, #fff9d7 35%, #e8d98e 100%);
+  box-shadow: -2px -2px 5px rgba(255,255,255,.48), -8px 10px 17px rgba(60,45,17,.18);
+}
+@media (max-width: 980px) {
+  .notes-scene { inset: 62px 24px 124px; }
+}
+@media (max-width: 720px) {
+  .notes-scene { inset: 52px 10px 116px; }
+}
+
+/* Peel away the entire top sheet; the curled corner and moving cast shadow
+   make the click feel like removing one note from the stack. */
+.postit-stack { perspective: 1100px; filter: none; }
+.postit-note {
+  transform-origin: 100% 100%;
+  transform:
+    perspective(900px)
+    translate3d(calc(var(--peel-progress) * -102px), calc(var(--peel-progress) * -76px), 0)
+    rotate(calc(-1.5deg - var(--peel-progress) * 13deg))
+    rotateY(calc(var(--peel-progress) * -17deg));
+  opacity: calc(1 - var(--peel-progress) * .62);
+  will-change: transform, opacity;
+}
+.postit-stack:hover .postit-note,
+.postit-stack:focus-visible .postit-note {
+  transform:
+    perspective(900px)
+    translate3d(calc(var(--peel-progress) * -102px), calc(var(--peel-progress) * -76px - 3px), 0)
+    rotate(calc(-.6deg - var(--peel-progress) * 13deg))
+    rotateY(calc(var(--peel-progress) * -17deg));
+}
+.postit-content { opacity: calc(1 - var(--peel-progress)); }
+.postit-peel-shadow {
+  right: calc(16px + var(--peel-progress) * 30px);
+  bottom: calc(14px - var(--peel-progress) * 20px);
+  width: calc(78px + var(--peel-progress) * 84px);
+  height: calc(24px + var(--peel-progress) * 28px);
+  opacity: calc(.08 + var(--peel-progress) * .34);
+  filter: blur(calc(9px + var(--peel-progress) * 11px));
+  transform: translate3d(calc(var(--peel-progress) * 20px), calc(var(--peel-progress) * 23px), 0) skewX(-16deg);
+}
+.postit-peel-sheet {
+  width: calc(72px + var(--peel-progress) * 72px);
+  height: calc(72px + var(--peel-progress) * 72px);
+  border-top-left-radius: 24px;
+  background:
+    linear-gradient(145deg, #fffef5 0%, #fff9df 28%, #f5e9b0 62%, #dfcf88 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 15% 88%, 28% 72%, 39% 54%, 54% 36%, 72% 17%);
+  transform:
+    perspective(900px)
+    rotateY(calc(var(--peel-progress) * -82deg))
+    rotateX(calc(var(--peel-progress) * 13deg))
+    translate3d(calc(var(--peel-progress) * -24px), calc(var(--peel-progress) * -18px), 0);
+}
+.phase-entering .postit-note {
+  animation: memoSettleIn 360ms cubic-bezier(.2,.72,.24,1) both;
+}
+@keyframes memoSettleIn {
+  from { opacity: .25; transform: translate3d(14px,-18px,0) rotate(3deg) scale(.97); }
+  to { opacity: 1; transform: rotate(-1.5deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phase-entering .postit-note { animation-duration: .01ms !important; }
+}

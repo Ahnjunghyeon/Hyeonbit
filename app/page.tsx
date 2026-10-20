@@ -53,30 +53,30 @@ const introNotes: IntroNote[] = [
   {
     id: "observe",
     number: "01",
-    label: "HOW I THINK",
-    title: "작은 불편도 그냥 넘기지 않습니다.",
-    description: "반복되거나 애매한 흐름을 보면 왜 불편한지 먼저 관찰하고, 더 자연스러운 방식으로 풀어내려 합니다.",
+    label: "IDEAS I NOTICE",
+    title: "불편한 순간이 아이디어가 돼요.",
+    description: "‘이런 게 있으면 좋겠다’ 싶은 순간을 그냥 지나치지 않고, 직접 만들어볼 방법을 생각해요.",
   },
   {
     id: "build",
     number: "02",
-    label: "HOW I BUILD",
-    title: "아이디어를 실제 서비스까지 연결합니다.",
-    description: "UI만 예쁘게 만드는 데서 끝내지 않고, 필요한 로직과 AI를 붙여 직접 쓰고 배포할 수 있는 결과물까지 만듭니다.",
+    label: "MAKING IT REAL",
+    title: "생각만 하던 걸 직접 만들어봐요.",
+    description: "작은 화면 하나부터 실제로 써볼 수 있는 서비스까지, 아이디어가 움직이는 순간이 제일 재밌어요.",
   },
   {
     id: "flow",
     number: "03",
-    label: "WHAT I CARE ABOUT",
-    title: "처음 들어온 사람의 흐름을 중요하게 봅니다.",
-    description: "기능을 많이 넣기보다 처음 보는 사람도 바로 이해하고 움직일 수 있는 구조를 더 중요하게 생각합니다.",
+    label: "THE LITTLE DETAILS",
+    title: "쓰는 사람 입장도 놓치지 않으려고 해요.",
+    description: "만드는 재미만큼 처음 쓰는 사람도 편하게 쓸 수 있는지 살펴보고, 어색한 부분은 계속 다듬어요.",
   },
   {
     id: "play",
     number: "04",
-    label: "WHAT I ENJOY",
-    title: "AI와 바이브코딩으로 빠르게 실험합니다.",
-    description: "생활 속 아이디어, 재미있는 상상, 업무 불편함을 빠르게 프로토타입으로 만들고 실제 서비스로 다듬는 과정을 좋아합니다.",
+    label: "WHAT I’M EXPLORING",
+    title: "요즘은 AI랑 이것저것 만들어봐요.",
+    description: "바이브코딩으로 떠오른 아이디어를 빠르게 앱으로 만들어보고, 마음에 드는 건 실제로 써볼 수 있게 다듬어요.",
   },
 ];
 
@@ -514,9 +514,9 @@ export default function Home() {
               </div>
 
               <div className="hero-product-result note-result is-visible">
-                <span className="hero-product-number">CLICK OR DRAG THE CORNER</span>
+                <span className="hero-product-number">PEEL TO THE NEXT NOTE</span>
                 <strong className="hero-about-title">한 장씩 넘기며 현빗을 소개합니다.</strong>
-                <p>오른쪽 아래를 왼쪽으로 살짝 끌어당기거나 포스트잇을 클릭해 다음 메모를 볼 수 있습니다.</p>
+                <p>메모지를 클릭하거나 오른쪽 아래 모서리를 잡아당겨 다음 장을 넘겨보세요.</p>
               </div>
 
               <button type="button" className="playground-hint" onClick={() => triggerNoteChange(0)} disabled={noteBusy}>
