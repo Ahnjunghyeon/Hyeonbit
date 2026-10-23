@@ -95,9 +95,22 @@ const profile: Profile = {
 
 const projects: Project[] = [
   {
-    id: "chiikawa-windows",
+    id: "chiikawa-license",
     number: "01",
-    title: "치이카와 다운로드",
+    title: "치이카와 자격증 시험",
+    category: "CHIIKAWA CERTIFICATE EXAM",
+    summary: "치이카와 친구들과 함께하는 자격증 시험",
+    description: "치이카와 세계관으로 즐기는 제초 자격증 시험 웹앱입니다.",
+    detail: "문제를 풀고 시험 결과와 취득한 자격증을 확인할 수 있습니다. 카드를 누르거나 실행 버튼을 선택하면 시험장으로 바로 이동합니다.",
+    tags: ["Chiikawa", "Certificate Exam", "Web App"],
+    href: "https://ckwl.vercel.app/",
+    mediaKind: "web",
+    media: { desktop: "/projects/chiikawa-license-logo.png" },
+  },
+  {
+    id: "chiikawa-windows",
+    number: "02",
+    title: "치이카와 Windows 다운로드",
     category: "WINDOWS DESKTOP APP",
     summary: "WINDOWS용 바탕화면 치이카와 굿즈",
     description: "치이카와·하치와레·우사기·모몽가가 캐릭터로 구성되어있습니다.",
@@ -110,7 +123,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-assets",
-    number: "02",
+    number: "03",
     title: "치이카와 프롬프트",
     category: "AI APP BUILD GUIDE",
     summary: "Assets와 프롬프트로 바탕화면 캐릭터 앱 만들기",
@@ -124,7 +137,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-mac",
-    number: "03",
+    number: "04",
     title: "치이카와 Mac 다운로드(임시)",
     category: "MAC DESKTOP APP",
     summary: "Apple Silicon 맥에서 실행하는 치이카와 데스크톱 앱",
@@ -137,7 +150,7 @@ const projects: Project[] = [
   },
   {
     id: "flowmark",
-    number: "04",
+    number: "05",
     title: "Flowmark",
     category: "WEB + MOBILE",
     summary: "중요한 시장 흐름을 빠르게 확인하는 경제 뉴스 서비스",
@@ -155,7 +168,7 @@ const projects: Project[] = [
   },
   {
     id: "bap",
-    number: "05",
+    number: "06",
     title: "BAP.P",
     category: "MOBILE FIRST",
     summary: "밥 프레지던트 — 식사 선택을 더 재미있게 만드는 모바일 중심 서비스",
@@ -170,7 +183,7 @@ const projects: Project[] = [
   },
   {
     id: "usagi",
-    number: "06",
+    number: "07",
     title: "USAGI",
     category: "MOBILE FIRST",
     summary: "우리 사이의 기류를 해석하는 AI 관계 분석 서비스",
@@ -185,7 +198,7 @@ const projects: Project[] = [
   },
   {
     id: "folder-tree",
-    number: "07",
+    number: "08",
     title: "Folder Tree",
     category: "WEB ONLY",
     summary: "폴더의 구조만 빠르게 복제하는 웹 전용 도구",
@@ -200,7 +213,7 @@ const projects: Project[] = [
   },
   {
     id: "file-bowling",
-    number: "08",
+    number: "09",
     title: "File Bowling",
     category: "DESKTOP APP",
     summary: "바탕화면의 파일을 볼링처럼 날리는 Windows 설치형 프로그램",

@@ -869,6 +869,7 @@ footer { background: var(--warm-dark); color: rgba(255,248,239,.65); }
 .media-project-flowmark .responsive-browser { aspect-ratio: 1206 / 923; }
 .media-project-folder-tree .browser-frame { aspect-ratio: 1065 / 620; }
 .media-project-file-bowling .desktop-app-frame > img { object-fit: contain; background: #181818; }
+.media-project-chiikawa-license .browser-frame > img { object-fit: contain; background: #f8f3e9; }
 
 .media-mobile { padding: 26px 24px 24px; }
 .media-mobile .phone-frame { width: min(37%, 176px); }
