@@ -123,8 +123,21 @@ const projects: Project[] = [
     media: { app: "/projects/chiikawa-logo.png" },
   },
   {
-    id: "flowmark",
+    id: "chiikawa-mac",
     number: "03",
+    title: "치이카와 Mac 다운로드",
+    category: "MAC DESKTOP APP",
+    summary: "Apple Silicon 맥에서 실행하는 치이카와 데스크톱 앱",
+    description: "Apple Silicon(arm64) Mac용 Chiikawa 앱입니다. macOS 13 이상에서 사용할 수 있습니다.",
+    detail: "ZIP 파일을 다운로드한 뒤 압축을 풀고 Chiikawa.app을 실행하세요. 앱을 자주 사용할 경우 응용 프로그램 폴더로 옮겨두면 편리합니다.",
+    tags: ["macOS", "Apple Silicon", "Desktop App", "Chiikawa"],
+    downloads: [{ label: "Mac 앱 ZIP 다운로드", href: "/downloads/Chiikawa_Mac.zip", filename: "Chiikawa_Mac.zip" }],
+    mediaKind: "desktop-app",
+    media: { app: "/projects/chiikawa-logo.png" },
+  },
+  {
+    id: "flowmark",
+    number: "04",
     title: "Flowmark",
     category: "WEB + MOBILE",
     summary: "중요한 시장 흐름을 빠르게 확인하는 경제 뉴스 서비스",
@@ -142,7 +155,7 @@ const projects: Project[] = [
   },
   {
     id: "bap",
-    number: "04",
+    number: "05",
     title: "BAP.P",
     category: "MOBILE FIRST",
     summary: "밥 프레지던트 — 식사 선택을 더 재미있게 만드는 모바일 중심 서비스",
@@ -157,7 +170,7 @@ const projects: Project[] = [
   },
   {
     id: "usagi",
-    number: "05",
+    number: "06",
     title: "USAGI",
     category: "MOBILE FIRST",
     summary: "우리 사이의 기류를 해석하는 AI 관계 분석 서비스",
@@ -172,7 +185,7 @@ const projects: Project[] = [
   },
   {
     id: "folder-tree",
-    number: "06",
+    number: "07",
     title: "Folder Tree",
     category: "WEB ONLY",
     summary: "폴더의 구조만 빠르게 복제하는 웹 전용 도구",
@@ -187,7 +200,7 @@ const projects: Project[] = [
   },
   {
     id: "file-bowling",
-    number: "07",
+    number: "08",
     title: "File Bowling",
     category: "DESKTOP APP",
     summary: "바탕화면의 파일을 볼링처럼 날리는 Windows 설치형 프로그램",
@@ -553,6 +566,8 @@ export default function Home() {
                     <button type="button" onClick={() => setSelected(project)}>Info</button>
                     {project.notionUrl ? (
                       <a href={project.notionUrl} target="_blank" rel="noreferrer">설명·다운로드 <ArrowUpRight /></a>
+                    ) : project.downloads?.length ? (
+                      <a href={project.downloads[0].href} download={project.downloads[0].filename}>앱 ZIP 다운로드 ↓</a>
                     ) : project.href ? (
                       <a href={project.href} target="_blank" rel="noreferrer">Open <ArrowUpRight /></a>
                     ) : project.download ? (
@@ -597,7 +612,9 @@ export default function Home() {
                 <div className="tag-row">{selected.tags.map((tag) => <span key={tag}>#{tag}</span>)}</div>
                 {selected.downloads ? (
                   <div className="modal-download-actions">
-                    <a className="modal-cta" href={selected.notionUrl} target="_blank" rel="noreferrer">Notion에서 설치·제작 설명 보기 <ArrowUpRight /></a>
+                    {selected.notionUrl && (
+                      <a className="modal-cta" href={selected.notionUrl} target="_blank" rel="noreferrer">Notion에서 설치·제작 설명 보기 <ArrowUpRight /></a>
+                    )}
                     {selected.downloads.map((item) => (
                       <a className="modal-download-secondary" key={item.href} href={item.href} download={item.filename}>{item.label} ↓</a>
                     ))}
