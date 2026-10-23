@@ -125,7 +125,7 @@ const projects: Project[] = [
   {
     id: "chiikawa-mac",
     number: "03",
-    title: "치이카와 Mac 다운로드",
+    title: "치이카와 Mac 다운로드(임시)",
     category: "MAC DESKTOP APP",
     summary: "Apple Silicon 맥에서 실행하는 치이카와 데스크톱 앱",
     description: "Apple Silicon(arm64) Mac용 Chiikawa 앱입니다. macOS 13 이상에서 사용할 수 있습니다.",
