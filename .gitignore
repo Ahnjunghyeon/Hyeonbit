@@ -47,3 +47,7 @@ Thumbs.db
 # IMPORTANT:
 # public/downloads/ is intentionally NOT ignored.
 # File Bowling installer files are deployed as portfolio downloads.
+
+# App distribution is hosted on GitHub Releases
+/public/downloads/Hyeonbit-Rug.zip
+/public/downloads/Hyeonbit-Rug.7z*

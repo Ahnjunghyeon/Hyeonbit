@@ -95,8 +95,21 @@ const profile: Profile = {
 
 const projects: Project[] = [
   {
-    id: "chiikawa-license",
+    id: "hyeonbit-rug",
     number: "01",
+    title: "현빗러그",
+    category: "WINDOWS DESKTOP APP",
+    summary: "바탕화면 위에서 펼치는 나만의 검술",
+    description: "러그를 잡아 옮기고, 다양한 호흡의 검기로 잘라보는 Windows 무설치 앱입니다.",
+    detail: "ZIP을 모두 압축 해제한 뒤 HyeonbitRug.exe를 실행해 주세요. Node.js 설치는 필요하지 않습니다. EXE와 DLL, resources 폴더를 함께 보관해 주세요. 좌클릭 이동 · 우클릭 베기 · Ctrl+휠 크기 · Ctrl+Shift+휠 검술 변경 · Ctrl+Shift+R 원위치. Windows 64비트 테스트 배포본입니다.",
+    tags: ["Windows", "무설치", "귀멸의 칼날", "바탕화면 러그"],
+    downloads: [{ label: "Windows 무설치 ZIP 다운로드 · 약 171MB", href: "https://github.com/Ahnjunghyeon/Hyeonbitsub/releases/download/rug-v0.1.0/Hyeonbit-Rug.zip", filename: "Hyeonbit-Rug.zip" }],
+    mediaKind: "desktop-app",
+    media: { app: "/projects/hyeonbit-rug.webp" },
+  },
+  {
+    id: "chiikawa-license",
+    number: "02",
     title: "치이카와 자격증 시험",
     category: "CHIIKAWA CERTIFICATE EXAM",
     summary: "치이카와 친구들과 함께하는 자격증 시험",
@@ -109,7 +122,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-windows",
-    number: "02",
+    number: "03",
     title: "치이카와 Windows 다운로드",
     category: "WINDOWS DESKTOP APP",
     summary: "WINDOWS용 바탕화면 치이카와 굿즈",
@@ -117,13 +130,17 @@ const projects: Project[] = [
     detail: "압축을 푼 뒤 Chiikawa.exe를 실행하면 됩니다. 창 옆에 매달린 캐릭터는 약 1초 뒤 벽을 타고 올라가고, 꼭대기에서 산책과 휴식 동작을 이어갑니다. 설치 방법과 단축키, 주의사항은 Notion 가이드에서 확인할 수 있습니다.",
     tags: ["Windows", "Desktop App", "Chiikawa"],
     notionUrl: "https://app.notion.com/p/Windows-3feb927d091c81079696fd0a07485589?source=copy_link",
-    downloads: [{ label: "Windows 앱 ZIP 다운로드", href: "/downloads/Chiikawa_Windows(1).zip", filename: "Chiikawa_Windows(1).zip" }],
+    downloads: [{
+      label: "Windows 앱 ZIP 다운로드",
+      href: "https://github.com/Ahnjunghyeon/Hyeonbit/releases/download/Chiikawa/Chiikawa.v2.zip",
+      filename: "Chiikawa.v2.zip"
+    }],
     mediaKind: "desktop-app",
     media: { app: "/projects/chiikawa-logo.png" },
   },
   {
     id: "chiikawa-assets",
-    number: "03",
+    number: "04",
     title: "치이카와 프롬프트",
     category: "AI APP BUILD GUIDE",
     summary: "Assets와 프롬프트로 바탕화면 캐릭터 앱 만들기",
@@ -137,7 +154,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-mac",
-    number: "04",
+    number: "05",
     title: "치이카와 Mac 다운로드(임시)",
     category: "MAC DESKTOP APP",
     summary: "Apple Silicon 맥에서 실행하는 치이카와 데스크톱 앱",
@@ -150,7 +167,7 @@ const projects: Project[] = [
   },
   {
     id: "flowmark",
-    number: "05",
+    number: "06",
     title: "Flowmark",
     category: "WEB + MOBILE",
     summary: "중요한 시장 흐름을 빠르게 확인하는 경제 뉴스 서비스",
@@ -168,7 +185,7 @@ const projects: Project[] = [
   },
   {
     id: "bap",
-    number: "06",
+    number: "07",
     title: "BAP.P",
     category: "MOBILE FIRST",
     summary: "밥 프레지던트 — 식사 선택을 더 재미있게 만드는 모바일 중심 서비스",
@@ -183,7 +200,7 @@ const projects: Project[] = [
   },
   {
     id: "usagi",
-    number: "07",
+    number: "08",
     title: "USAGI",
     category: "MOBILE FIRST",
     summary: "우리 사이의 기류를 해석하는 AI 관계 분석 서비스",
@@ -198,7 +215,7 @@ const projects: Project[] = [
   },
   {
     id: "folder-tree",
-    number: "08",
+    number: "09",
     title: "Folder Tree",
     category: "WEB ONLY",
     summary: "폴더의 구조만 빠르게 복제하는 웹 전용 도구",
@@ -213,7 +230,7 @@ const projects: Project[] = [
   },
   {
     id: "file-bowling",
-    number: "09",
+    number: "10",
     title: "File Bowling",
     category: "DESKTOP APP",
     summary: "바탕화면의 파일을 볼링처럼 날리는 Windows 설치형 프로그램",
@@ -241,6 +258,10 @@ function ProjectMedia({ project, modal = false }: { project: Project; modal?: bo
   const mobile = project.media.mobile;
   const app = project.media.app;
   const cls = `project-media media-${project.mediaKind} media-project-${project.id}${modal ? " is-modal" : ""}`;
+
+  if (project.id === "hyeonbit-rug") {
+    return <div className={cls}><img className="rug-card-art" src={app} alt="현빗러그 · 귀멸의 칼날" loading="lazy" decoding="async" /><span className="media-label">WINDOWS · 무설치</span></div>;
+  }
 
   if (project.mediaKind === "mobile") {
     return (

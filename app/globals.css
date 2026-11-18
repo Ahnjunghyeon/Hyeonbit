@@ -4162,3 +4162,23 @@ footer { padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   .phase-entering .postit-note { animation-duration: .01ms !important; }
 }
+
+/* Rug artwork stays within its own card and modal. */
+.media-project-hyeonbit-rug { background: radial-gradient(ellipse at center, #41252e, #100e14 78%); overflow:hidden; }
+.media-project-hyeonbit-rug .rug-card-art { width:100%; height:100%; object-fit:contain; padding:24px; box-sizing:border-box; filter:drop-shadow(0 10px 18px #0008); }
+
+/* Keep the complete rug logo inside responsive card and detail bounds.
+   Higher specificity beats generic cover rules; absolute sizing avoids grid intrinsic overflow. */
+.project-media.media-project-hyeonbit-rug { position:absolute; inset:0; min-width:0; min-height:0; }
+.project-media.media-project-hyeonbit-rug > img.rug-card-art {
+  position:absolute; inset:0; display:block;
+  width:100%; height:100%; min-width:0; min-height:0; max-width:100%; max-height:100%;
+  box-sizing:border-box; padding:clamp(12px,2.5vw,24px) clamp(12px,2.5vw,24px) 44px;
+  object-fit:contain; object-position:center; transform:none; contain:none;
+}
+.project-visual:hover .project-media.media-project-hyeonbit-rug > img.rug-card-art { transform:none; }
+.modal-image-wrap .project-media.media-project-hyeonbit-rug { position:relative; inset:auto; min-height:0; height:clamp(240px,55vh,520px); width:100%; }
+@media(max-width:600px){
+ .project-media.media-project-hyeonbit-rug > img.rug-card-art { padding:12px 12px 38px; }
+ .modal-image-wrap .project-media.media-project-hyeonbit-rug { height:clamp(220px,48vh,380px); }
+}
