@@ -95,8 +95,34 @@ const profile: Profile = {
 
 const projects: Project[] = [
   {
-    id: "hyeonbit-rug",
+    id: "whitechrismas",
     number: "01",
+    title: "WhiteChrismas",
+    category: "WINDOWS DESKTOP APP",
+    summary: "바탕화면과 창가에 내려앉는 포근한 겨울",
+    description: "눈이 내리고 창 위에 쌓이는 Windows 데스크톱 앱입니다. 눈덩이와 눈사람, 겨울 장식으로 나만의 겨울을 꾸며보세요.",
+    detail: "ZIP을 모두 압축 해제한 뒤 폴더 안의 EXE를 실행해 주세요. EXE와 함께 제공되는 파일 및 폴더를 함께 보관해 주세요. 치이카와_겨울버전을 함께 실행하면 눈사람과 장식 줄에 캐릭터가 매달리는 상호작용을 즐길 수 있습니다. Wintermas 기반의 수정 버전입니다.",
+    tags: ["Windows", "겨울", "눈", "Chiikawa 호환"],
+    downloads: [{ label: "WhiteChrismas ZIP 다운로드", href: "https://github.com/Ahnjunghyeon/Hyeonbit/releases/download/whitechrismas-v0.2.24/WhiteChrismas.zip", filename: "WhiteChrismas.zip" }],
+    mediaKind: "desktop-app",
+    media: { app: "/projects/whitechrismas-logo.png" },
+  },
+  {
+    id: "chiikawa-winter-v3",
+    number: "02",
+    title: "치이카와_겨울버전(WhiteChrismas 호환)",
+    category: "WINDOWS DESKTOP APP",
+    summary: "WhiteChrismas와 함께 즐기는 치이카와의 겨울",
+    description: "바탕화면에서 움직이는 치이카와 친구들의 겨울버전입니다. WhiteChrismas를 함께 실행하면 겨울 장식과 상호작용합니다.",
+    detail: "기존 치이카와 앱을 종료하고 ZIP을 모두 압축 해제한 뒤 Chiikawa_winter_v3.exe를 실행해 주세요. EXE와 함께 제공되는 파일 및 폴더를 함께 보관해 주세요. WhiteChrismas v0.2.24와 함께 사용하면 눈사람 및 장식 줄에 매달리고 줄의 흔들림에 반응하는 동작을 즐길 수 있습니다. 두 앱은 각각 실행해 주세요.",
+    tags: ["Windows", "Chiikawa", "겨울버전", "WhiteChrismas 호환"],
+    downloads: [{ label: "치이카와 겨울버전 ZIP 다운로드", href: "https://github.com/Ahnjunghyeon/Hyeonbit/releases/download/chiikawa-winter-v3-v0.6.8/Chiikawa_winter_v3.zip", filename: "Chiikawa_winter_v3.zip" }],
+    mediaKind: "desktop-app",
+    media: { app: "/projects/chiikawa-logo.png" },
+  },
+  {
+    id: "hyeonbit-rug",
+    number: "03",
     title: "현빗러그",
     category: "WINDOWS DESKTOP APP",
     summary: "바탕화면 위에서 펼치는 나만의 검술",
@@ -109,7 +135,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-license",
-    number: "02",
+    number: "04",
     title: "치이카와 자격증 시험",
     category: "CHIIKAWA CERTIFICATE EXAM",
     summary: "치이카와 친구들과 함께하는 자격증 시험",
@@ -122,7 +148,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-windows",
-    number: "03",
+    number: "05",
     title: "치이카와 Windows 다운로드",
     category: "WINDOWS DESKTOP APP",
     summary: "WINDOWS용 바탕화면 치이카와 굿즈",
@@ -140,7 +166,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-assets",
-    number: "04",
+    number: "06",
     title: "치이카와 프롬프트",
     category: "AI APP BUILD GUIDE",
     summary: "Assets와 프롬프트로 바탕화면 캐릭터 앱 만들기",
@@ -154,7 +180,7 @@ const projects: Project[] = [
   },
   {
     id: "chiikawa-mac",
-    number: "05",
+    number: "07",
     title: "치이카와 Mac 다운로드(임시)",
     category: "MAC DESKTOP APP",
     summary: "Apple Silicon 맥에서 실행하는 치이카와 데스크톱 앱",
@@ -167,7 +193,7 @@ const projects: Project[] = [
   },
   {
     id: "flowmark",
-    number: "06",
+    number: "08",
     title: "Flowmark",
     category: "WEB + MOBILE",
     summary: "중요한 시장 흐름을 빠르게 확인하는 경제 뉴스 서비스",
@@ -185,7 +211,7 @@ const projects: Project[] = [
   },
   {
     id: "bap",
-    number: "07",
+    number: "09",
     title: "BAP.P",
     category: "MOBILE FIRST",
     summary: "밥 프레지던트 — 식사 선택을 더 재미있게 만드는 모바일 중심 서비스",
@@ -200,7 +226,7 @@ const projects: Project[] = [
   },
   {
     id: "usagi",
-    number: "08",
+    number: "10",
     title: "USAGI",
     category: "MOBILE FIRST",
     summary: "우리 사이의 기류를 해석하는 AI 관계 분석 서비스",
@@ -215,7 +241,7 @@ const projects: Project[] = [
   },
   {
     id: "folder-tree",
-    number: "09",
+    number: "11",
     title: "Folder Tree",
     category: "WEB ONLY",
     summary: "폴더의 구조만 빠르게 복제하는 웹 전용 도구",
@@ -230,7 +256,7 @@ const projects: Project[] = [
   },
   {
     id: "file-bowling",
-    number: "10",
+    number: "12",
     title: "File Bowling",
     category: "DESKTOP APP",
     summary: "바탕화면의 파일을 볼링처럼 날리는 Windows 설치형 프로그램",
@@ -585,7 +611,7 @@ export default function Home() {
 
           <div className="project-grid">
             {projects.map((project) => (
-              <article className={`project-card project-card-${project.mediaKind}`} key={project.id}>
+              <article className={`project-card project-card-${project.mediaKind} project-card-${project.id}`} key={project.id}>
                 <div className="project-card-head">
                   <div className="project-title-line"><span>{project.number}</span><h3>{project.title}</h3></div>
                   <span className="project-platform">{project.category}</span>

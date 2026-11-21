@@ -4182,3 +4182,10 @@ footer { padding: 0; }
  .project-media.media-project-hyeonbit-rug > img.rug-card-art { padding:12px 12px 38px; }
  .modal-image-wrap .project-media.media-project-hyeonbit-rug { height:clamp(220px,48vh,380px); }
 }
+
+/* Keep the winter edition title readable at every card width. */
+.project-card-chiikawa-winter-v3 .project-title-line h3 {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
